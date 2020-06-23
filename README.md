@@ -19,7 +19,12 @@ This will load all the lists generated, we are interested in the *localanc* list
 local_pos=grid_to_pos(localanc,"../MOSAIC_output/",g.loc,chrnos)
 ```
 
-This will generate lists for each individual, each chromosome and the local ancestry at the respective SNP. 
+The result will be 29 arrays, for each chromosome, that contain *x* number of matrices, where *x* is the number of SNPs at that chromosome, each with two rows, and 184 columns making up the local ancestry estimates or taurine/indicine as there are 92 samples, 92*2 = 184.
+
+```
+local_pos_chr29 <- local_pos[[29]]
+
+```
 
  
 
