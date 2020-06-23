@@ -23,7 +23,7 @@ The result will be 29 arrays, for each chromosome, that contain *x* number of ma
 
 ```
 local_pos_chr29 <- local_pos[[29]]
-
+list <- local_pos_chr29[1:2,1:5,1:5]
 ```
 
  
