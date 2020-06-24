@@ -25,6 +25,7 @@ A×2N×G
 $$
 Where A is the number of modelled ancestries, N is the number of target individuals and G is the number of SNPs. 
 
+<<<<<<< HEAD
 Following are attempts to create local ancestry plots for SNP positions:
 
 ```R
@@ -57,6 +58,11 @@ lanc_plots <- function(chrno) {
 }
 
 lanc_plots(7)
+=======
+​```R
+local_pos_chr29 <- local_pos[[29]]
+list <- local_pos_chr29[1:2,1:5,1:5]
+>>>>>>> ee3997cbeaafb37a23f5e3a322e5c72ffdb14213
 ```
 
 ```R
