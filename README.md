@@ -1,4 +1,4 @@
-# Local Ancestry - mt Gene Enrichment
+# rLocal Ancestry - mt Gene Enrichment
 
 *For project on enrichment of mitochondrial genes.*
 
@@ -19,12 +19,65 @@ This will load all the lists generated, we are interested in the *localanc* list
 local_pos=grid_to_pos(localanc,"../MOSAIC_output/",g.loc,chrnos)
 ```
 
-The result will be 29 arrays, for each chromosome, that contain *x* number of matrices, where *x* is the number of SNPs at that chromosome, each with two rows, and 184 columns making up the local ancestry estimates or taurine/indicine as there are 92 samples, 92*2 = 184.
+Resulting object will be a list with each entry being one chromosome, within each chromosome will be an array with dimensions:
+$$
+A×2N×G
+$$
+Where A is the number of modelled ancestries, N is the number of target individuals and G is the number of SNPs. 
 
-```
-local_pos_chr29 <- local_pos[[29]]
-list <- local_pos_chr29[1:2,1:5,1:5]
+Following are attempts to create local ancestry plots for SNP positions:
+
+```R
+library(reshape2)
+library(ggplot2)
+
+load("lanc_pos.RData")
+lanc_chr <- local_pos[[7]]
+
+lanc_plots <- function(chrno) {
+  x <- list()
+  for (i in 1:26780) {
+    x[[i]] <- mean(lanc_chr[1,1:184,i]) 
+  }
+  y <- list()
+  for (i in 1:26780) {
+    y[[i]] <- mean(lanc_chr[2,1:184,i])
+  }
+  
+  chr_pos<- do.call(rbind, Map(data.frame, Indicine=x, Taurine=y))
+  snpfile <- read.table(paste0("snpfile.",chrno))
+  chr_pos$Position <- snpfile$V4
+  
+  mchr_pos <- melt(chr_pos, id.vars=c("Position"), variable.name="Ancestry", value.name="Ancestry_Proportion")
+  
+  png(paste0("lanc_chr",chrno,".png"), width = 6, height = 4, units = "in", res = 150)
+  ggplot(mchr_pos, aes(x=Position, y=Ancestry_Proportion, fill=Ancestry)) + 
+    geom_area()
+  dev.off()
+}
+
+lanc_plots(7)
 ```
 
- 
+```R
+x <- list()
+for (i in 1:26780) {
+  x[[i]] <- mean(lanc_chr[1,1:184,i]) 
+}
+y <- list()
+for (i in 1:26780) {
+  y[[i]] <- mean(lanc_chr[2,1:184,i])
+}
+
+chr_pos<- do.call(rbind, Map(data.frame, Indicine=x, Taurine=y))
+snpfile <- read.table(paste0("snpfile.",7))
+chr_pos$Position <- snpfile$V4
+
+mchr_pos <- melt(chr_pos, id.vars=c("Position"), variable.name="Ancestry", value.name="Ancestry_Proportion")
+
+png(paste0("lanc_chr",7,".png"), width = 6, height = 4, units = "in", res = 150)
+ggplot(mchr_pos, aes(x=Position, y=Ancestry_Proportion, fill=Ancestry)) + 
+  geom_area()
+dev.off()
+```
 
