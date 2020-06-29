@@ -19,11 +19,8 @@ This will load all the lists generated, we are interested in the *localanc* list
 local_pos=grid_to_pos(localanc,"../MOSAIC_output/",g.loc,chrnos)
 ```
 
-Resulting object will be a list with each entry being one chromosome, within each chromosome will be an array with dimensions:
-$$
-A×2N×G
-$$
-Where A is the number of modelled ancestries, N is the number of target individuals and G is the number of SNPs. 
+Resulting object will be a list with each entry being one chromosome, within each chromosome will be an array with dimensions *A x 2N x G*. Where A is the number of modelled ancestries, N is the number of target individuals and G is the number of SNPs. 
 
 We can generate local ancestry plots for each chromosome using the R script *lanc_pos_plots.R*. 
 
+### Gene Files
