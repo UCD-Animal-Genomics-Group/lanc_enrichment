@@ -24,3 +24,20 @@ Resulting object will be a list with each entry being one chromosome, within eac
 We can generate local ancestry plots for each chromosome using the R script *lanc_pos_plots.R*. 
 
 ### Gene Files
+
+In order to use the script from the *Zaidi et al. 2019* paper, I will need to generate a file that has the following columns:
+
+1. Gene chromosome
+2. Gene start 
+3. Gene end
+4. Gene name
+5. Broad category 
+6. Narrow category
+7. SNP chromosome
+8. SNP start 
+9. SNP end
+10. Local ancestry 1
+11. Local Ancestry 2
+
+To get the gene list and the genes associated with mitochondrial function, the MitoCarta 2.0 database will be utilised. 
+
