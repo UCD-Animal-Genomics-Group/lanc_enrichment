@@ -1,3 +1,4 @@
+#altered script to generate plots assocaited with bootstrap script.
 library(ggplot2)
 library(plyr)
 library(data.table)
