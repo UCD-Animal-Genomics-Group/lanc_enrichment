@@ -1,3 +1,5 @@
+#altered script to generate plots associated with bootstrap script, original from Zaidi et al.
+
 library(reshape2)
 library(ggplot2)
 library(magrittr)
