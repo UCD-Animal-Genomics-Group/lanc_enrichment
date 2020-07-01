@@ -1,4 +1,4 @@
-#altered script to generate plots associated with bootstrap script, original from Zaidi et al.
+#script used to generate local ancestry plots from MOSAIC data.
 
 library(reshape2)
 library(ggplot2)
