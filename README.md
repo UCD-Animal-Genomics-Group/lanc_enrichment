@@ -39,5 +39,13 @@ In order to use the script from the *Zaidi et al. 2019* paper, I will need to ge
 10. Local ancestry 1
 11. Local Ancestry 2
 
-To get the gene list and the genes associated with mitochondrial function, the MitoCarta 2.0 database will be utilised. 
+To get the gene list and the genes associated with mitochondrial function, the MitoCarta 2.0 database was utilised. A gene list comprising all cattle genes was generated using [BovineMine1.6](http://128.206.116.13:8080/bovinemine/begin.do). Genes in this list were then assigned values for two categories. Broad and narrow. Broad included genes which were non-mitochondrial and mitochondrial. Narrow included non-mitochondrial, high-mt and low-mt. In total the number of genes in the list came to ~25,000.
+
+Following this, a list of SNPs and the respective local ancestries was generated from the data using R. 
+
+These two files were made to be in .BED format, the reason being that BEDTOOLS will be used to generate windows of 2.5 Mb either side of the midpoint of the genes. The SNP data will be intersected with the gene data, which will output a file in the format which is detailed above. The command used to do this in BEDTOOLS is below:
+
+```bash
+bedtools window -a gene_lists.bed -b snp_lists.bed -w 2500000
+```
 
