@@ -1,3 +1,4 @@
+#altered for use with cattle data
 #script to generate bootstrapped loal ancestry estimates for genic windows
 #load dependencies
 library(data.table)
