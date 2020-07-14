@@ -39,13 +39,16 @@ In order to use the script from the *Zaidi et al. 2019* paper, I will need to ge
 10. Local ancestry 1
 11. Local Ancestry 2
 
-To get the gene list and the genes associated with mitochondrial function, the MitoCarta 2.0 database was utilised. A gene list comprising all cattle genes was generated using [BovineMine1.6](http://128.206.116.13:8080/bovinemine/begin.do). Genes in this list were then assigned values for two categories. Broad and narrow. Broad included genes which were non-mitochondrial and mitochondrial. Narrow included non-mitochondrial, high-mt and low-mt. In total the number of genes in the list came to ~25,000.
+To get the gene list and the genes associated with mitochondrial function, the MitoCarta 2.0 database, as well as Ensemble Biomart were utilised. 
 
-Following this, a list of SNPs and the respective local ancestries was generated from the data using R. 
+A gene list comprising all cattle genes was generated using [BovineMine1.6](http://128.206.116.13:8080/bovinemine/begin.do). From this approximately ~25,000 genes were downloaded into a tab separated file. Genes in this list were then assigned values for two categories. Broad and narrow. Broad included genes which were non-mitochondrial and mitochondrial. Narrow included non-mitochondrial, high-mt and low-mt. High and low-mt genes were found from the Zaidi *et al.* (2019) paper which listed them. These were then selected and using Ensemble biomart, the orthologous genes for cattle were determined for the ARS1.2 assembly. Following QC of the gene set, a total of 18,673 genes remained, of these genes, 138 were in the "high-mt" category and 701 were in the "low-mt" category. 
 
-These two files were made to be in .BED format, the reason being that BEDTOOLS will be used to generate windows of 2.5 Mb either side of the midpoint of the genes. The SNP data will be intersected with the gene data, which will output a file in the format which is detailed above. The command used to do this in BEDTOOLS is below:
+Following this, a list of SNPs and the respective local ancestries was generated from the data using R. The scripts used to generate the SNP file with respective local ancestries are *snpfile_generator.R* and *snpfile_joiner.R*. 
+
+These two files were made to be in .BED format. To ensure all the files are in the correct format and in order the R script *gene_snp_list.R*  was used. The reason for using .bed format is that that BEDTOOLS will be used to generate windows of 2.5 Mb either side of the midpoint of the genes. The SNP data will be intersected with the gene data, which will output a file in the format which is detailed above. The command used to do this in BEDTOOLS is below:
 
 ```bash
-bedtools window -a gene_lists.bed -b snp_lists.bed -w 2500000
+bedtools window -a gene_lists.bed -b snp_lists.bed -w 2500000 > output.txt
 ```
 
+Following this the output can be loaded into R and the *bootstraps.R* script can be run to perform a bootstrap analysis on the data. Following this the results can then be loaded into the *plots.R* script to load the plots.
